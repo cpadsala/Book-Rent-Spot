@@ -1,0 +1,268 @@
+/*#region Manually Added CSS*/
+
+/*#region Footer*/
+
+
+.header-img {
+    overflow: auto;
+    background-image: url('images/head.jpg');
+    padding: 4px;
+    background-size: cover;
+}
+
+    .header-img img {
+        float: left;
+        background-size: 100%;
+    }
+
+
+
+#footerlogo {
+    width: 200px;
+    height: 75px;
+    margin-top: 0px;
+}
+
+
+/*#endregion Footer*/
+
+/*#region Asp:Calender*/
+
+
+
+.rescalender {
+    border: none;
+}
+
+
+
+    .rescalender .Title {
+        background-color: #265990;
+        border: 1px solid black;
+        border-bottom-width: 0px;
+    }
+
+        .rescalender .Title td {
+            font-family: verdana;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+            background-color: #265990;
+            padding-top: 3px;
+            padding-bottom: 5px;
+        }
+
+    .rescalender td {
+        font-weight: bolder;
+        padding-bottom: unset;
+    }
+
+    .rescalender .DayHeader {
+        background-color: #719dcd;
+        color: black;
+        font-weight: bolder;
+        font-family: Verdana;
+        font-size: 11px;
+        text-align: center;
+        border-top: solid 0px #FFFFFF;
+        border-left: solid 1px #FFFFFF;
+        border-bottom: solid 2px #E3E0CD;
+        border-right: solid 1px #C6C1AC;
+        padding: 4px;
+    }
+
+    .rescalender .Day {
+        text-align: center;
+        vertical-align: middle;
+        font-family: Verdana;
+        font-size: 11px;
+        color: Black;
+        background-color: #FFFFFF;
+        border: solid 1px #C6C1AC;
+        padding: 2px;
+    }
+
+    .rescalender .OtherMonthDay {
+        background-color: #E8DFC9;
+    }
+
+
+/*#endregion Asp:Calender*/
+
+/*#region Asp:Gridview*/
+.rounded-corners {
+    display: inline-block;
+    border: 1px solid #565656;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.Grid td, .Grid th {
+    border: 1px solid #565656;
+    text-align: center;
+    padding-top: 3.5px;
+    padding-bottom: 3.5px;
+    padding-right: 4px;
+    padding-left: 4px;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/*#endregion Asp:Gridview*/
+
+
+.btn-log {
+    padding-top: 15px;
+}
+
+/*.btngrid {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+    .btngrid.active.focus, .btngrid.active:focus, .btngrid.focus, .btngrid:active.focus, .btngrid:active:focus, .btngrid:focus {
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+
+    .btngrid.focus, .btngrid:focus, .btngrid:hover {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .btngrid.active, .btngrid:active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+        box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    }
+
+    .btngrid.disabled, .btngrid[disabled], fieldset[disabled] .btngrid {
+        cursor: not-allowed;
+        filter: alpha(opacity=65);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: .65;
+    }*/
+
+
+.btngrid {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+    .btngrid.focus, .btngrid:focus {
+        color: #fff;
+        background-color: #286090;
+        border-color: #122b40;
+    }
+
+    .btngrid:hover {
+        color: #fff;
+        background-color: #286090;
+        border-color: #204d74;
+    }
+
+    .btngrid.active, .btngrid:active, .open > .dropdown-toggle.btngrid {
+        color: #fff;
+        background-color: #286090;
+        border-color: #204d74;
+    }
+
+        .btngrid.active.focus, .btngrid.active:focus, .btngrid.active:hover, .btngrid:active.focus, .btngrid:active:focus, .btngrid:active:hover, .open > .dropdown-toggle.btngrid.focus, .open > .dropdown-toggle.btngrid:focus, .open > .dropdown-toggle.btngrid:hover {
+            color: #fff;
+            background-color: #204d74;
+            border-color: #122b40;
+        }
+
+    .btngrid.active, .btngrid:active, .open > .dropdown-toggle.btngrid {
+        background-image: none;
+    }
+
+    .btngrid.disabled.focus, .btngrid.disabled:focus, .btngrid.disabled:hover, .btngrid[disabled].focus, .btngrid[disabled]:focus, .btngrid[disabled]:hover, fieldset[disabled] .btngrid.focus, fieldset[disabled] .btngrid:focus, fieldset[disabled] .btngrid:hover {
+        background-color: #337ab7;
+        border-color: #2e6da4;
+    }
+
+    .btngrid .badge {
+        color: #337ab7;
+        background-color: #fff;
+    }
+
+.btn-group-gridsize > .btngrid, .btngridsize {
+    padding: 1px 5px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+    .btn-group-grid > .btngrid .badge, .btngridsize .badge {
+        top: 0;
+        padding: 1px 5px;
+    }
+
+.headtext {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+
+.headtags {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.headtags2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.headtags3 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+.customwell {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    width: 80%;
+}
+
+    .customwell blockquote {
+        border-color: #ddd;
+        border-color: rgba(0,0,0,.15);
+    }
+
+/*#endregion Manually Added CSS*/

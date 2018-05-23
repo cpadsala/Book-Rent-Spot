@@ -1,0 +1,4 @@
+F:\597 (Project)\EPRS\EPRS\bin\EPRS.dll
+F:\597 (Project)\EPRS\EPRS\bin\EPRS.pdb
+F:\597 (Project)\EPRS\EPRS\obj\Debug\EPRS.dll
+F:\597 (Project)\EPRS\EPRS\obj\Debug\EPRS.pdb

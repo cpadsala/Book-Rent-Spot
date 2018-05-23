@@ -1,0 +1,47 @@
+﻿body {
+}
+
+.bar-center .btn-bar {
+    display: inline-block;
+    width: auto;
+}
+
+.btn-bar .btn-bar-item {
+    padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: 1px solid black;
+    outline: none;
+    display: block;
+    background-color: #22517B;
+    color: white;
+}
+
+
+.btn-bar .bar-button {
+    white-space: normal;
+}
+
+.bar-btn, .bar-button {
+    border: none;
+    display: inline-block;
+    outline: 0;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+    /*.bar-black {
+            color: #fff !important;
+            background-color: #656d78 !important;
+        }*/
+
+    .bar-button:hover {
+        background-color: grey;
+    }

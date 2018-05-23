@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+        <style>
+        #map {
+            height: 400px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #description {
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        #infowindow-content .title {
+            font-weight: bold;
+        }
+
+        #infowindow-content {
+            display: none;
+        }
+
+        #map #infowindow-content {
+            display: inline;
+        }
+
+        .pac-card {
+            margin: 10px 10px 0 0;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            font-family: Roboto;
+        }
+
+        #pac-container {
+            padding-bottom: 12px;
+            margin-right: 12px;
+        }
+
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+
+            .pac-controls label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 400px;
+        }
+
+            #pac-input:focus {
+                border-color: #4d90fe;
+            }
+
+        #title {
+            color: #fff;
+            background-color: #4d90fe;
+            font-size: 25px;
+            font-weight: 500;
+            padding: 6px 12px;
+        }
+
+        #target {
+            width: 345px;
+        }
+    </style>
+
+    <h1>Book Spot</h1>
+
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+    <div id="map"></div>
+
+    <input type="hidden" id="city2" name="city2" />
+    <input type="hidden" id="cityLat" name="cityLat" />
+    <input type="hidden" id="cityLng" name="cityLng" />
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8pngpKaht8_kKOYKUV9qteKAatWMqzRs&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <script type="text/javascript" lang="javascript">
+        //function initialize(input) {
+        //    var autocomplete = new google.maps.places.Autocomplete(input);
+        //    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+
+        //        var place = autocomplete.getPlace();
+
+        //        var latvalue = place.geometry.location.lat();
+        //        var longvalue = place.geometry.location.lng();
+
+        //        alert(longvalue);
+
+        //        var obj = {};
+        //        obj['lat'] = latvalue;
+        //        obj['lng'] = longvalue;
+        //        return obj;
+        //    });
+        //}
+
+        function initAutocomplete() {
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 33.8688, lng: -117.92195 },
+                zoom: 13,
+                mapTypeId: 'roadmap'
+            });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
+
+
+            var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function (place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location
+                    }));
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+
+            var service = new google.maps.places.PlacesService(map);
+            //var latt = map.geometry.location.lat();
+            //var lngg = map.geometry.location.lng();
+            //var obj = initialize(input);
+            //if (obj['lat'] = "") {
+            //    obj = { lat: 33.8688, lng: -117.92195 };
+            //}
+            service.nearbySearch({
+                location: { lat: 33.8688, lng: -117.92195 },
+                radius: 5000,
+                type: ['parking']
+            }, callback);
+
+            function callback(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                    }
+                }
+            }
+
+            function createMarker(place) {
+                var placeLoc = place.geometry.location;
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent(place.name);
+                    infowindow.open(map, this);
+                });
+            }
+
+        }
+    </script>
+
+
+    <%--    Places and map side by side--%>
+    <!--<style>
+        #map {
+            height: 400px;
+        }
+
+        #right-panel {
+            font-family: 'Roboto','sans-serif';
+            /*line-height: 30px;*/
+            padding-left: 10px;
+            max-height:400px;
+        }
+    </style>
+    <script type="text/javascript" lang="javascript">
+        var map;
+
+        function initMap() {
+            // Create the map.
+            var pyrmont = { lat: -33.866, lng: 151.196 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: pyrmont,
+                zoom: 17
+            });
+
+            // Create the places service.
+            var service = new google.maps.places.PlacesService(map);
+            var getNextPage = null;
+            var moreButton = document.getElementById('more');
+            moreButton.onclick = function () {
+                moreButton.disabled = true;
+                if (getNextPage) getNextPage();
+            };
+
+            // Perform a nearby search.
+            service.nearbySearch(
+                { location: pyrmont, radius: 5000, type: ['parking'] },
+                function (results, status, pagination) {
+                    if (status !== 'OK') return;
+
+                    createMarkers(results);
+                    moreButton.disabled = !pagination.hasNextPage;
+                    getNextPage = pagination.hasNextPage && function () {
+                        pagination.nextPage();
+                    };
+                });
+        }
+
+        function createMarkers(places) {
+            var bounds = new google.maps.LatLngBounds();
+            var placesList = document.getElementById('places');
+
+            for (var i = 0, place; place = places[i]; i++) {
+                var image = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    icon: image,
+                    title: place.name,
+                    position: place.geometry.location
+                });
+
+                var li = document.createElement('li');
+                li.textContent = place.name;
+                placesList.appendChild(li);
+
+                bounds.extend(place.geometry.location);
+            }
+            map.fitBounds(bounds);
+        }
+    </script>
+    <div class="row" style="height:400px;">
+        <div class="col-lg-6">
+            <div id="Div1"></div>
+        </div>
+        <div class="col-lg-6" >
+            <div id="right-panel">
+                <h2>Results</h2>
+                <ul id="places"></ul>
+                <button id="more">More results</button>
+            </div>
+        </div> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYASMUBxH9O0C2SL1dCBNbmaZaju4r8iU&libraries=places&callback=initMap" async defer></script>
+    </div> -->
+
+
+
+    <%--innions maps.html--%>
+    <%--<!--<div class="row">
+        <div class="col-md-6">
+            <!-- START GOOGLE MAP WITH MARKER ->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Google Map With Markers</h3>
+                </div>
+                <div class="panel-body panel-body-map">
+                    <div id="google_ptm_map" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+            <!-- END GOOGLE MAP WITH MARKER ->
+        </div>
+        <div class="col-md-6">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Google Map Search</h3>
+                    <div class="pull-right" style="width: 200px;">
+                        <input type="text" id="target" class="form-control" />
+                    </div>
+                </div>
+                <div class="panel-body panel-body-map">
+                    <div id="google_search_map" style="width: 100%; height: 300px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+   <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYASMUBxH9O0C2SL1dCBNbmaZaju4r8iU&libraries=places"></script>
+
+    <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+    <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+    <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-europe-mill-en.js'></script>
+    <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-us-aea-en.js'></script>
+
+    <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <!-- END THIS PAGE PLUGINS-->
+
+    <!-- START TEMPLATE ->
+    <script type="text/javascript" src="js/settings.js"></script>
+
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/actions.js"></script>
+    <script type="text/javascript" src="js/demo_maps.js"></script>
+
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../../../www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-36783416-1', 'aqvatarius.com');
+        ga('send', 'pageview');
+        </script>-->
+</body>
+</html>

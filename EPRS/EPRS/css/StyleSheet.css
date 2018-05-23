@@ -1,0 +1,52 @@
+﻿html, body {
+    height: 100%;
+}
+html {
+    overflow-y: hidden;
+}
+body {
+    /*overflow-y: scroll;*/
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    background: url(../images/Bg.jpg);
+    background-image: url(../images/Bg.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: 100% 100%;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  background-image: url(../images/csuf_login_details_background.png);
+  background-size: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+}
+
+.exactcentered {
+    text-align:center;
+    font-family: 'Lucida Sans Unicode', Verdana, Arial, Sans-Serif;
+    font-size: 20pt;
+}
+
+.exactcenteredgrid {
+    text-align:center;
+    font-family: Calibri;
+    font-size: 12pt;
+}
+
+.rounded-corners
+        {
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+

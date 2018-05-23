@@ -1,0 +1,112 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminMaster.master.cs" Inherits="EPRS.AdminMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Book or Rent Your Spot</title>
+    <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="js/plugins/jquery/jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function openModal(head, message) {
+            $(window).load(function () {
+                $('#headtxt').html(head);
+                $('#bodytxt').html(message);
+                $('#myModal').modal('show');
+            });
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="page-container">
+                <div class="page-sidebar">
+                    <ul class="x-navigation">
+                        <li class="">
+                            <a href="Dashboard.aspx" style="color: white; font-size: medium; background-color: #334168">Book/Rent Your Spot</a>
+                            <a href="#" class="x-navigation-control"></a>
+                        </li>
+                        <li class="xn-profile">
+                            <div class="profile">
+                                <div class="profile-image">
+                                    <asp:Image runat="server" ID="imProfile" ImageUrl="~/images/Profile.jpg" AlternateText="Profile Picture" class="img-thumbnail" />
+                                </div>
+                                <div class="profile-data">
+                                    <div class="profile-data-name">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <ul>
+                            <li><a href="AdminReport.aspx"><span class='fa fa-edit'></span>Fetch Report</a></li>
+                            <li><a href="AdminEditUser.aspx"><span class='fa fa-edit'></span>Edit Users</a></li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="page-content">
+                    <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                        <li class="xn-icon-button pull-right last">
+                            <a id="A1" onclick="btnLogoutClientClick();" class="mb-control" runat="server"><span class="fa fa-power-off"></span></a>
+                        </li>
+                    </ul>
+                    <asp:Button ID="btnLogout" runat="server" Text="Submit" OnClick="btnLogout_Click" UseSubmitBehavior="false" ClientIDMode="Static" Style="display: none" />
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            
+            <script type="text/javascript" language="javascript">
+                function btnLogoutClientClick() {
+                    document.getElementById("btnLogout").click();
+                }
+            </script>
+
+            <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+            <script type="text/javascript" src="js/popup.js"></script>
+            <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+            <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>            
+            <script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+            <script type="text/javascript" src="js/plugins.js"></script>
+            <script type="text/javascript" src="js/actions.js"></script>
+            <%--<script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+            <script type="text/javascript" src="js/plugins/moment.min.js"></script>
+            <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>            
+            <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+            <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+            <script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
+            <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>
+            <script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script>
+            <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+            <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+            <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>            
+            <script type="text/javascript" src="js/demo_dashboard.js"></script>
+            <script type="text/javascript" src="js/lightbox.js"></script>--%>
+        </div>
+    </form>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="headtxt">Error.</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="bodytxt">Sorry we are experiencing some issues, try again in sometime.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
